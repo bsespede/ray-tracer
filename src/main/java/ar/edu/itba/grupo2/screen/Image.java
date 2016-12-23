@@ -16,10 +16,10 @@ public class Image {
 		try {
 			BufferedImage image = new BufferedImage(vp.getWidth(), vp.getHeight(), BufferedImage.TYPE_INT_ARGB);
 			Graphics2D graphics = image.createGraphics();
-			for (int i = 0; i < vp.hRes; i++) {
-				for (int j = 0; j < vp.vRes; j++) {
-					graphics.setColor(vp.getPixel(i, j).toColor());
-					graphics.drawRect((int) (i * vp.s), (int) (j * vp.s), (int) (vp.s), (int) vp.s);
+			for (int i = 0; i < vp.getWidth(); i++) {
+				for (int j = 0; j < vp.getHeight(); j++) {
+					graphics.setColor(vp.getPixel(i/(int)vp.s, j/(int)vp.s).toColor());
+					graphics.drawRect(i, j, 1, 1);
 				}
 			}
 			ImageIO.write(image, format, output);

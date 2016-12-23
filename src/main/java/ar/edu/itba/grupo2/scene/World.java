@@ -22,8 +22,15 @@ public class World {
 	private final List<GeometricObject> objects;
 	private final Tracer tracer;
 	
-	public World(final int hRes, final int vRes, final RGBColor background) {
-		this.vp = new ViewPlane(hRes, vRes);
+	public World(final int hRes, final int vRes) {
+		this.vp = new ViewPlane(hRes, vRes, 1);
+		this.background = new RGBColor(0, 0, 0);
+		this.objects = new LinkedList<GeometricObject>();
+		this.tracer = new RayTracer(this);
+	}
+	
+	public World(final int hRes, final int vRes, final float s, final RGBColor background) {
+		this.vp = new ViewPlane(hRes, vRes, s);
 		this.background = background;
 		this.objects = new LinkedList<GeometricObject>();
 		this.tracer = new RayTracer(this);

@@ -13,8 +13,8 @@ public class Sphere implements GeometricObject {
 	private final Point3D p;
 	private final RGBColor color;
 	
-	public Sphere(final float r, final Point3D p, final RGBColor color) {
-		this.radius = r;
+	public Sphere(final float radius, final Point3D p, final RGBColor color) {
+		this.radius = radius;
 		this.p = p;
 		this.color = color;
 	}

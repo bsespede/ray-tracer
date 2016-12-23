@@ -5,7 +5,6 @@ import ar.edu.itba.grupo2.utils.RGBColor;
 public class ViewPlane {
 
 	private final RGBColor[][] pixels;
-	private final float invGamma;
 	public final int hRes;
 	public final int vRes;
 	public final float s;
@@ -15,23 +14,17 @@ public class ViewPlane {
 		this.hRes = hRes;
 		this.vRes = vRes;
 		this.s = 1;
-		this.invGamma = 1;
 	}
 	
-	public ViewPlane(final int hRes, final int vRes, final float s, final float gamma) {
+	public ViewPlane(final int hRes, final int vRes, final float s) {
 		this.pixels = new RGBColor[hRes][vRes];
 		this.hRes = hRes;
 		this.vRes = vRes;
 		this.s = s;
-		this.invGamma = 1/gamma;
 	}
 	
 	public void drawPixel(final int row, final int col, final RGBColor color) {
-		if (invGamma != 1) {
-			pixels[row][col] = new RGBColor((float) Math.pow(color.r, invGamma), (float) Math.pow(color.g, invGamma), (float) Math.pow(color.b, invGamma));
-		} else {
-			pixels[row][col] = color;			
-		}
+			pixels[row][col] = color;
 	}
 
 	public int getWidth() {
