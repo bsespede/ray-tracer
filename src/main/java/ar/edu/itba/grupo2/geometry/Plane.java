@@ -5,34 +5,38 @@ import ar.edu.itba.grupo2.math.Vector3D;
 import ar.edu.itba.grupo2.ray.Collision;
 import ar.edu.itba.grupo2.ray.Ray;
 import ar.edu.itba.grupo2.utils.Constant;
+import ar.edu.itba.grupo2.utils.RGBColor;
 
 public class Plane implements GeometricObject{
 
 	private final Vector3D n;
 	private final Point3D p;
+	private final RGBColor color;
 	
-	public Plane(Point3D p, Vector3D n) {
+	public Plane(final Point3D p, final Vector3D n, final RGBColor color) {
 		this.p = p;
 		this.n = n;
+		this.color = color;
 	}
 	
-	public boolean hit(final Ray ray, final Collision collision) {
+	public Collision hit(final Ray ray) {
 		float aux = n.dot(ray.d);
 		
 		if (aux == 0) {
-			return false;
+			return null;
 		}
 		
 		float t = ((p.x - ray.p.x) * n.x + (p.y - ray.p.y) * n.y + (p.z - ray.p.z) * n.z) / aux;
 		
 		if (t > Constant.EPSILON) {
-			collision.n = n;
-			collision.p = ray.p.translate(ray.d, t);
-			collision.t = t;
-			return true;
+			return new Collision(ray.p.translate(ray.d, t), n, t, this);
 		}
 		
-		return false;
+		return null;
+	}
+
+	public RGBColor getColor() {
+		return color;
 	}
 
 }
