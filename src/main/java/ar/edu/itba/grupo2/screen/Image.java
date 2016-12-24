@@ -18,7 +18,7 @@ public class Image {
 			Graphics2D graphics = image.createGraphics();
 			for (int i = 0; i < vp.getWidth(); i++) {
 				for (int j = 0; j < vp.getHeight(); j++) {
-					graphics.setColor(vp.getPixel(i/(int)vp.s, j/(int)vp.s).toColor());
+					graphics.setColor(vp.getPixel((int) (i / vp.s), (int) (j / vp.s)).toColor());
 					graphics.drawRect(i, j, 1, 1);
 				}
 			}

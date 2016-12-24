@@ -8,11 +8,11 @@ import ar.edu.itba.grupo2.utils.RGBColor;
 
 public class Main {
 	
-    public static void main( String[] args ) {
-    	World world = new World(500, 500, 2.0f, new RGBColor(1, 1, 1));
+    public static void main(String[] args) {
+    	World world = new World(300, 300, 1.0f, 16, new RGBColor());
     	world.build();
     	world.render();
-    	Image.draw(world, new File("test/test.png"), "png");
+    	Image.draw(world, new File("test/test2.png"), "png");
     }
     
 }

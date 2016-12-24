@@ -7,16 +7,15 @@ import ar.edu.itba.grupo2.ray.Ray;
 import ar.edu.itba.grupo2.utils.Constant;
 import ar.edu.itba.grupo2.utils.RGBColor;
 
-public class Plane implements GeometricObject{
+public class Plane extends GeometricObject{
 
 	private final Vector3D n;
 	private final Point3D p;
-	private final RGBColor color;
 	
 	public Plane(final Point3D p, final Vector3D n, final RGBColor color) {
+		super(color);
 		this.p = p;
 		this.n = n;
-		this.color = color;
 	}
 	
 	public Collision hit(final Ray ray) {
@@ -33,10 +32,6 @@ public class Plane implements GeometricObject{
 		}
 		
 		return null;
-	}
-
-	public RGBColor getColor() {
-		return color;
 	}
 
 }

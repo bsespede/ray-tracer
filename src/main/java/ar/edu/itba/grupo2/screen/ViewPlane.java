@@ -9,6 +9,7 @@ public class ViewPlane {
 	public final int vRes;
 	public final float s;
 	
+	
 	public ViewPlane(final int hRes, final int vRes) {
 		this.pixels = new RGBColor[hRes][vRes];
 		this.hRes = hRes;

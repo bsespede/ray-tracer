@@ -7,16 +7,15 @@ import ar.edu.itba.grupo2.ray.Ray;
 import ar.edu.itba.grupo2.utils.Constant;
 import ar.edu.itba.grupo2.utils.RGBColor;
 
-public class Sphere implements GeometricObject {
+public class Sphere extends GeometricObject {
 	
 	private final float radius;
 	private final Point3D p;
-	private final RGBColor color;
 	
 	public Sphere(final float radius, final Point3D p, final RGBColor color) {
+		super(color);
 		this.radius = radius;
 		this.p = p;
-		this.color = color;
 	}
 
 	public Collision hit(final Ray ray) {
@@ -45,10 +44,6 @@ public class Sphere implements GeometricObject {
 			}
 		}
 		return null;
-	}
-
-	public RGBColor getColor() {
-		return color;
 	}
 
 }
