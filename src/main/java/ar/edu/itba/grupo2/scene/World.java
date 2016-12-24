@@ -60,8 +60,10 @@ public class World {
 	}
 	
 	public void build() {
-		objects.add(new Plane(new Point3D(0, 0, 0), new Vector3D(0,0, 1), new RGBColor(1, 1, 0)));
-		objects.add(new Sphere(100, new Point3D(0, 0, 0), new RGBColor(1, 0, 0)));
+		objects.add(new Plane(new Point3D(0, 0, 0), new Vector3D(0, 1, 0), new RGBColor(1, 1, 0)));
+		objects.add(new Sphere(1, new Point3D(0, 0, 2), new RGBColor(1, 0, 0)));
+		objects.add(new Sphere(1, new Point3D(2, 0, 0), new RGBColor(0, 0, 1)));
+		objects.add(new Sphere(1, new Point3D(0, 2, 0), new RGBColor(0, 1, 0)));
 	}
 	
 	public RGBColor getBackground() {

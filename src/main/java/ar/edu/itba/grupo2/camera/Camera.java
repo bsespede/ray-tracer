@@ -15,11 +15,18 @@ public abstract class Camera {
 		this.eye = eye;
 		this.lookAt = lookAt;
 		this.up = up;
-		this.w = eye.distanceVector(lookAt);
-		w.normalize();
-		this.u = up.cross(w);
-		u.normalize();
-		this.v = w.cross(u);
+		final Vector3D distanceVector = eye.distanceVector(lookAt);
+		final Vector3D parallelTest = distanceVector.cross(up);
+		if (parallelTest.x == 0 && parallelTest.y == 0 && parallelTest.z == 0) { // test for gymbal locking
+			System.out.println("Gymbal lock");
+			this.u = new Vector3D(0, 0, 1);
+			this.v = new Vector3D(1, 0, 0);
+			this.w = new Vector3D(0, 1, 0);
+		} else { // otherwise calculate the ONB
+			this.w = distanceVector;
+			this.u = up.cross(w).normalize();
+			this.v = w.cross(u).normalize();
+		}		
 	}
 	
 	public abstract void render(World world);
