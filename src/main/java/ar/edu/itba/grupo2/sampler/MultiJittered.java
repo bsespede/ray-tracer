@@ -9,7 +9,7 @@ public class MultiJittered extends Sampler {
 	}
 
 	// Based on the "Ray tracing from the Ground up" implementation by Kevin Suffern
-	public void generateSamples() {
+	public void generateSquareSamples() {
 		final int n = (int) Math.sqrt(numSamples);
 		final float subcellWidth = 1.0f / numSamples;
 

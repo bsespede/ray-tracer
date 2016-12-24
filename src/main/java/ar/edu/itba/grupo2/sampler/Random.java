@@ -9,7 +9,7 @@ public class Random extends Sampler {
 	}
 
 	@Override
-	public void generateSamples() {
+	public void generateSquareSamples() {
 		for (int i = 0; i < numSets; i++) {
 			for (int j = 0; j < numSamples; j++) {
 				squareSamples.add(new Point2D((float) Math.random(), (float) Math.random()));

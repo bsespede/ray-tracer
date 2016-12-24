@@ -8,7 +8,7 @@ public class Regular extends Sampler {
 		super(numSamples);
 	}
 
-	public void generateSamples() {
+	public void generateSquareSamples() {
 		final int n = (int) Math.sqrt(numSamples);
 
 		for (int i = 0; i < numSets; i ++) {

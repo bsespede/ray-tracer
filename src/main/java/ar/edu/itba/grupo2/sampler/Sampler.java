@@ -5,10 +5,11 @@ import java.util.Collections;
 import java.util.List;
 
 import ar.edu.itba.grupo2.math.Point2D;
-import ar.edu.itba.grupo2.utils.Constant;
+import ar.edu.itba.grupo2.utils.MathConst;
 
 public abstract class Sampler {
 
+	private static final int DEFAULT_SAMPLES_SETS = 83;
 	protected final List<Point2D> squareSamples;
 	protected final List<Point2D> diskSamples;
 	protected final List<Integer> shuffledIndices;
@@ -19,16 +20,16 @@ public abstract class Sampler {
 	
 	public Sampler(final int numSamples) {
 		this.numSamples = numSamples;
-		this.numSets = Constant.SAMPLES_SETS;
-		this.squareSamples = new ArrayList<Point2D>(numSamples * Constant.SAMPLES_SETS);
-		this.diskSamples = new ArrayList<Point2D>(numSamples * Constant.SAMPLES_SETS);
-		this.shuffledIndices = new ArrayList<Integer>(numSamples * Constant.SAMPLES_SETS);
-		generateSamples();
-		mapSamplesToDisk();
+		this.numSets = DEFAULT_SAMPLES_SETS;
+		this.squareSamples = new ArrayList<Point2D>(numSamples * DEFAULT_SAMPLES_SETS);
+		this.diskSamples = new ArrayList<Point2D>(numSamples * DEFAULT_SAMPLES_SETS);
+		this.shuffledIndices = new ArrayList<Integer>(numSamples * DEFAULT_SAMPLES_SETS);
+		generateSquareSamples();
+		mapSquareSamplesToDisk();
 		shuffleIndices();
 	}
 	
-	protected abstract void generateSamples();
+	protected abstract void generateSquareSamples();
 	
 	protected void shuffleIndices() {
 		List<Integer> indices = new ArrayList<Integer>(numSamples);
@@ -54,17 +55,22 @@ public abstract class Sampler {
 	}
 	
 	public Point2D sampleUnitDisk() {
-		return null;
+		if (count % numSamples == 0) {
+			jump = (int) (Math.random() * numSets) * numSamples;
+		}
+		
+		return diskSamples.get(jump + shuffledIndices.get(jump + count++ % numSamples));
 	}
 	
-	private void mapSamplesToDisk() {
+	// Based on "Realistic Ray tracing" algorithm by Shirley/Morley
+	private void mapSquareSamplesToDisk() {
 		float r, phi;
 		Point2D sp = new Point2D(0, 0);
 		
 		for (int i = 0; i < diskSamples.size(); i ++) {
 			
 			sp.x = 2 * squareSamples.get(i).x - 1;
-			sp.y = 2 * squareSamples.get(1).y - 1;
+			sp.y = 2 * squareSamples.get(i).y - 1;
 			
 			if (sp.x > -sp.y) {
 				if (sp.x > sp.y) {
@@ -88,7 +94,7 @@ public abstract class Sampler {
 				}
 			}
 			
-			phi *= Constant.PI / 4.0f;
+			phi *= MathConst.PI / 4.0f;
 			diskSamples.add(i, new Point2D(r * (float) Math.cos(phi), r * (float) Math.sin(phi)));
 		}
 	}

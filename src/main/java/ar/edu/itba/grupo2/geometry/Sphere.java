@@ -4,7 +4,7 @@ import ar.edu.itba.grupo2.math.Point3D;
 import ar.edu.itba.grupo2.math.Vector3D;
 import ar.edu.itba.grupo2.ray.Collision;
 import ar.edu.itba.grupo2.ray.Ray;
-import ar.edu.itba.grupo2.utils.Constant;
+import ar.edu.itba.grupo2.utils.MathConst;
 import ar.edu.itba.grupo2.utils.RGBColor;
 
 public class Sphere extends GeometricObject {
@@ -33,13 +33,13 @@ public class Sphere extends GeometricObject {
 			float denom = 2 * a;
 			t = ((-1) * b - e) / denom;
 			
-			if (t > Constant.EPSILON) {
+			if (t > MathConst.EPSILON) {
 				return new Collision(ray.p.translate(ray.d, t), aux.add(ray.d.scale(t)).scale(1/radius), t, this);
 			}
 
 			t = ((-1) * b + e) / denom;
 			
-			if (t > Constant.EPSILON) {
+			if (t > MathConst.EPSILON) {
 				return new Collision(ray.p.translate(ray.d, t), aux.add(ray.d.scale(t)).scale(1/radius), t, this);
 			}
 		}
