@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 import ar.edu.itba.grupo2.math.Point2D;
+import ar.edu.itba.grupo2.math.Point3D;
 import ar.edu.itba.grupo2.utils.MathConst;
 
 public abstract class Sampler {
@@ -12,6 +13,7 @@ public abstract class Sampler {
 	private static final int DEFAULT_SAMPLES_SETS = 83;
 	protected final List<Point2D> squareSamples;
 	protected final List<Point2D> diskSamples;
+	protected final List<Point3D> hemisphereSamples;
 	protected final List<Integer> shuffledIndices;
 	protected final int numSamples;
 	protected final int numSets;
@@ -23,9 +25,11 @@ public abstract class Sampler {
 		this.numSets = DEFAULT_SAMPLES_SETS;
 		this.squareSamples = new ArrayList<Point2D>(numSamples * DEFAULT_SAMPLES_SETS);
 		this.diskSamples = new ArrayList<Point2D>(numSamples * DEFAULT_SAMPLES_SETS);
+		this.hemisphereSamples = new ArrayList<Point3D>(numSamples * DEFAULT_SAMPLES_SETS);
 		this.shuffledIndices = new ArrayList<Integer>(numSamples * DEFAULT_SAMPLES_SETS);
 		generateSquareSamples();
 		mapSquareSamplesToDisk();
+		mapSquareSamplesToHemisphere();
 		shuffleIndices();
 	}
 	
@@ -62,6 +66,14 @@ public abstract class Sampler {
 		return diskSamples.get(jump + shuffledIndices.get(jump + count++ % numSamples));
 	}
 	
+	public Point3D sampleUnitHemisphere() {
+		if (count % numSamples == 0) {
+			jump = (int) (Math.random() * numSets) * numSamples;
+		}
+		
+		return hemisphereSamples.get(jump + shuffledIndices.get(jump + count++ % numSamples));
+	}
+	
 	// Based on "Realistic Ray tracing" algorithm by Shirley/Morley
 	private void mapSquareSamplesToDisk() {
 		float r, phi;
@@ -96,6 +108,17 @@ public abstract class Sampler {
 			
 			phi *= MathConst.PI / 4.0f;
 			diskSamples.add(i, new Point2D(r * (float) Math.cos(phi), r * (float) Math.sin(phi)));
+		}
+	}
+	
+	// Based on "Realistic Ray tracing" algorithm by Shirley/Morley
+	private void mapSquareSamplesToHemisphere() {
+		for (int i = 0; i < hemisphereSamples.size(); i ++) {
+			float cosPhi = (float) Math.cos(2 * MathConst.PI * squareSamples.get(i).x);
+			float sinPhi = (float) Math.sin(2 * MathConst.PI * squareSamples.get(i).x);
+			float cosTheta = (float) Math.pow(1 - squareSamples.get(i).y, 1 / (MathConst.E + 1));
+			float sinTheta = (float) Math.sqrt(1 - cosTheta * cosTheta);
+			hemisphereSamples.add(new Point3D(sinTheta * cosPhi, sinTheta * sinPhi, cosTheta));			
 		}
 	}
 
