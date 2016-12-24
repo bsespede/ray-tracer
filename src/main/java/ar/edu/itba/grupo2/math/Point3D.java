@@ -24,5 +24,9 @@ public class Point3D {
 	public String toString() {
 		return "Point3D [x=" + x + ", y=" + y + ", z=" + z + "]";
 	}
+
+	public Vector3D distanceVector(Point3D lookAt) {
+		return new Vector3D(x - lookAt.x, y - lookAt.y, z - lookAt.z);
+	}
 	
 }

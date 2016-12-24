@@ -6,12 +6,11 @@ import java.util.List;
 import ar.edu.itba.grupo2.geometry.GeometricObject;
 import ar.edu.itba.grupo2.geometry.Plane;
 import ar.edu.itba.grupo2.geometry.Sphere;
-import ar.edu.itba.grupo2.math.Point2D;
 import ar.edu.itba.grupo2.math.Point3D;
 import ar.edu.itba.grupo2.math.Vector3D;
 import ar.edu.itba.grupo2.ray.Collision;
 import ar.edu.itba.grupo2.ray.Ray;
-import ar.edu.itba.grupo2.sampler.Jittered;
+import ar.edu.itba.grupo2.sampler.MultiJittered;
 import ar.edu.itba.grupo2.sampler.Regular;
 import ar.edu.itba.grupo2.sampler.Sampler;
 import ar.edu.itba.grupo2.screen.ViewPlane;
@@ -23,21 +22,21 @@ public class World {
 
 	private final ViewPlane vp;
 	private final Sampler sampler;
-	private final RGBColor background;
-	private final List<GeometricObject> objects;
 	private final Tracer tracer;
+	private final List<GeometricObject> objects;
+	private final RGBColor background;
 	
 	public World(final int hRes, final int vRes) {
 		this.sampler = new Regular(1);
 		this.vp = new ViewPlane(hRes, vRes, 1);
-		this.background = new RGBColor(0, 0, 0);
+		this.background = new RGBColor();
 		this.objects = new LinkedList<GeometricObject>();
 		this.tracer = new RayTracer(this);
 	}
 	
 	public World(final int hRes, final int vRes, final float s, final int samples, final RGBColor background) {
 		if (samples > 1) {
-			this.sampler = new Jittered(samples);
+			this.sampler = new MultiJittered(samples);
 		} else {
 			this.sampler = new Regular(1);			
 		}
@@ -45,28 +44,6 @@ public class World {
 		this.background = background;
 		this.objects = new LinkedList<GeometricObject>();
 		this.tracer = new RayTracer(this);
-	}
-	
-	public void render() {
-		RGBColor pixelColor;
-		Ray ray;
-		float z = 3;
-		Point2D sp, pp;
-		
-		for (int row = 0; row < vp.hRes; row++) {
-			for (int col = 0; col < vp.vRes; col++) {
-				pixelColor = new RGBColor(0, 0, 0);
-				for (int i = 0; i < sampler.numSamples(); i++) {
-					sp = sampler.sampleUnitSquare();
-					pp = new Point2D(vp.s * (col - 0.5f * vp.hRes + sp.x), vp.s * (row - 0.5f * vp.hRes + sp.y));
-					ray = new Ray(new Point3D(pp.x, pp.y, z), new Vector3D(0, 0, -1));
-					pixelColor.add(tracer.traceRay(ray));
-				}
-				pixelColor.div(sampler.numSamples());
-				vp.drawPixel(row, col, pixelColor);
-				
-			}
-		}
 	}
 	
 	public Collision hitObjects(final Ray ray) {
@@ -93,6 +70,14 @@ public class World {
 	
 	public ViewPlane getViewPlane() {
 		return vp;
+	}
+
+	public Sampler getSampler() {
+		return sampler;
+	}
+	
+	public Tracer getTracer() {
+		return tracer;
 	}
 	
 }

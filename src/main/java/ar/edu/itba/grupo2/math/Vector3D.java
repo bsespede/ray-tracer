@@ -54,6 +54,10 @@ public class Vector3D {
 		return this;
 	}
 	
+	public Vector3D scaleCopy(final float s) {
+		return new Vector3D(x * s, y * s, z * s);
+	}
+	
 	public float module() {
 		return (float) Math.sqrt(x * x + y * y + z * z);
 	}
