@@ -14,7 +14,7 @@ public class MultiJittered extends Sampler {
 		final float subcellWidth = 1.0f / numSamples;
 
 		for (int j = 0; j < numSamples * numSets; j++) {
-			samples.add(new Point2D(0, 0));
+			squareSamples.add(new Point2D(0, 0));
 		}
 
 		// distribute points in the initial patterns
@@ -24,7 +24,7 @@ public class MultiJittered extends Sampler {
 					Point2D point = new Point2D(0, 0);
 					point.x = (i * n + j) * subcellWidth + (float) Math.random() * subcellWidth;
 					point.y = (j * n + i) * subcellWidth + (float) Math.random() * subcellWidth;
-					samples.add(i * n + j + p * numSamples, point);
+					squareSamples.add(i * n + j + p * numSamples, point);
 				}
 			}
 		}
@@ -34,15 +34,15 @@ public class MultiJittered extends Sampler {
 				for (int j = 0; j < n; j++) {
 					// shuffle x coordinates
 					int k = (int) (Math.random() * (n - j - 1) + j);
-					float t = samples.get(i * n + j + p * numSamples).x;
-					samples.get(i * n + j + p * numSamples).x = samples.get(i * n + k + p * numSamples).x;
-					samples.get(i * n + k + p * numSamples).x = t;
+					float t = squareSamples.get(i * n + j + p * numSamples).x;
+					squareSamples.get(i * n + j + p * numSamples).x = squareSamples.get(i * n + k + p * numSamples).x;
+					squareSamples.get(i * n + k + p * numSamples).x = t;
 					
 					// shuffle y coordinates
 					k = (int) (Math.random() * (n - j - 1) + j);
-					t = samples.get(j * n + i + p * numSamples).y;
-					samples.get(j * n + i + p * numSamples).y = samples.get(k * n + i + p * numSamples).y;
-					samples.get(k * n + i + p * numSamples).y = t;
+					t = squareSamples.get(j * n + i + p * numSamples).y;
+					squareSamples.get(j * n + i + p * numSamples).y = squareSamples.get(k * n + i + p * numSamples).y;
+					squareSamples.get(k * n + i + p * numSamples).y = t;
 				}
 			}
 		}

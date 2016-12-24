@@ -14,7 +14,7 @@ public class Regular extends Sampler {
 		for (int i = 0; i < numSets; i ++) {
 			for (int j = 0; j < n; j++) {
 				for (int k = 0; k < n; k++) {
-					samples.add(new Point2D((k + 0.5f) / n, (j + 0.5f) / n));
+					squareSamples.add(new Point2D((k + 0.5f) / n, (j + 0.5f) / n));
 				}
 			}
 		}

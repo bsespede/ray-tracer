@@ -12,7 +12,7 @@ public class Random extends Sampler {
 	public void generateSamples() {
 		for (int i = 0; i < numSets; i++) {
 			for (int j = 0; j < numSamples; j++) {
-				samples.add(new Point2D((float) Math.random(), (float) Math.random()));
+				squareSamples.add(new Point2D((float) Math.random(), (float) Math.random()));
 			}
 		}
 	}
