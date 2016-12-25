@@ -79,7 +79,7 @@ public abstract class Sampler {
 		float r, phi;
 		Point2D sp = new Point2D(0, 0);
 		
-		for (int i = 0; i < diskSamples.size(); i ++) {
+		for (int i = 0; i < squareSamples.size(); i ++) {
 			
 			sp.x = 2 * squareSamples.get(i).x - 1;
 			sp.y = 2 * squareSamples.get(i).y - 1;
@@ -113,11 +113,13 @@ public abstract class Sampler {
 	
 	// Based on "Realistic Ray tracing" algorithm by Shirley/Morley
 	private void mapSquareSamplesToHemisphere() {
-		for (int i = 0; i < hemisphereSamples.size(); i ++) {
+		for (int i = 0; i < squareSamples.size(); i ++) {
 			float cosPhi = (float) Math.cos(2 * MathConst.PI * squareSamples.get(i).x);
 			float sinPhi = (float) Math.sin(2 * MathConst.PI * squareSamples.get(i).x);
+			
 			float cosTheta = (float) Math.pow(1 - squareSamples.get(i).y, 1 / (MathConst.E + 1));
 			float sinTheta = (float) Math.sqrt(1 - cosTheta * cosTheta);
+			
 			hemisphereSamples.add(new Point3D(sinTheta * cosPhi, sinTheta * sinPhi, cosTheta));			
 		}
 	}

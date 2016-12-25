@@ -11,13 +11,20 @@ import ar.edu.itba.grupo2.screen.Image;
 import ar.edu.itba.grupo2.utils.RGBColor;
 
 public class Main {
-	
-    public static void main(String[] args) {
+
+	public static void main(String[] args) {
     	World world = new World(300, 300, 1.0f, 16, new RGBColor());
     	world.build();
-    	Camera camera = new Pinhole(new Point3D(3, 3, 0), new Point3D(0, 0, 0), new Vector3D(0, 0, -1), 10);
-    	camera.render(world);
-    	Image.draw(world, new File("test/test2.png"), "png");
-    }
-    
+		Point3D eye = new Point3D(2, 0, 0);
+		Point3D lookAt = new Point3D(0, 0, 0);
+		Vector3D up = new Vector3D(0, 1, 0);
+    	
+//    	Camera camera = new Pinhole(eye, lookAt, up, 2);
+//    	camera.render(world);
+//    	Image.draw(world, new File("test/test2.png"), "png");
+		
+		RealtimeRender renderer = new RealtimeRender(world, eye, lookAt, up);
+		renderer.run();
+	}
+
 }

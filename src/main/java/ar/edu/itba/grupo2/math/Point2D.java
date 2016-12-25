@@ -12,6 +12,10 @@ public class Point2D {
 	@Override
 	public String toString() {
 		return "Point2D [x=" + x + ", y=" + y + "]";
-	}	
+	}
+	
+	public Point2D scaleCopy(float s) {
+		return new Point2D(x * s, y * s);
+	}
 	
 }

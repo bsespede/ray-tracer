@@ -28,5 +28,19 @@ public class Point3D {
 	public Vector3D distanceVector(Point3D lookAt) {
 		return new Vector3D(x - lookAt.x, y - lookAt.y, z - lookAt.z);
 	}
+
+	public Point3D add(Point3D p) {
+		this.x += p.x;
+		this.y += p.y;
+		this.z += p.z;
+		return this;
+	}
+	
+	public Point3D sub(Point3D p) {
+		this.x -= p.x;
+		this.y -= p.y;
+		this.z -= p.z;
+		return this;
+	}
 	
 }

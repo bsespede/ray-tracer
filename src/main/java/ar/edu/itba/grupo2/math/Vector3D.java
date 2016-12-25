@@ -69,5 +69,12 @@ public class Vector3D {
 	public String toString() {
 		return "Vector3D [x=" + x + ", y=" + y + ", z=" + z + "]";
 	}
+
+	public Vector3D add(Point3D p) {
+		this.x += p.x;
+		this.y += p.y;
+		this.z += p.z;
+		return this;
+	}
 	
 }
