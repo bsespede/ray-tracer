@@ -15,23 +15,17 @@ public class Plane extends GeometricObject{
 	public Plane(final Point3D p, final Vector3D n, final RGBColor color) {
 		super(color);
 		this.p = p;
-		this.n = n;
+		this.n = n.normalize();
 	}
 	
 	public Collision hit(final Ray ray) {
-		float aux = n.dot(ray.d);
-		
-		if (aux == 0) {
-			return null;
-		}
-		
-		float t = ((p.x - ray.p.x) * n.x + (p.y - ray.p.y) * n.y + (p.z - ray.p.z) * n.z) / aux;
+		float t = p.distanceVector(ray.p).dot(n) / ray.d.dot(n);
 		
 		if (t > MathConst.EPSILON) {
-			return new Collision(ray.p.translate(ray.d, t), n, t, this);
+			return new Collision(ray.p.translate(ray.d, t), n, t , this);
+		} else {
+			return null;
 		}
-		
-		return null;
 	}
 
 }

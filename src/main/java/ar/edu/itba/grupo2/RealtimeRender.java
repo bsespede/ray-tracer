@@ -40,7 +40,7 @@ public class RealtimeRender {
 		frame.addKeyListener(new CameraKeyListener());
 		while (true) {
 				long startTime = System.currentTimeMillis();
-				camera = new Pinhole(eye, lookAt, up, 10);
+				camera = new Pinhole(eye, lookAt, up, 5);
 				camera.render(world);
 				float elapsedtime = (System.currentTimeMillis() - startTime) / 1000f;
 				//System.out.println("[RayTracer] ended. Time: " + elapsedtime + " [s]");

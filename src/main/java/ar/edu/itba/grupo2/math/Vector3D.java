@@ -40,10 +40,10 @@ public class Vector3D {
 	}
 	
 	public Vector3D normalize() {
-		float m = 1.0f / module();
-		x *= m;
-		y *= m;
-		z *= m;
+		float m = module();
+		x /= m;
+		y /= m;
+		z /= m;
 		return this;
 	}
 	

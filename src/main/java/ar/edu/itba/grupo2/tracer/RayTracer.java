@@ -17,7 +17,8 @@ public class RayTracer implements Tracer {
 		Collision collision = world.hitObjects(ray);
 		
 		if (collision != null) {
-			return collision.object.getColor();
+			return new RGBColor(collision.object.getColor().r / collision.t, collision.object.getColor().g / collision.t, collision.object.getColor().b / collision.t);
+			//return collision.object.getColor();
 		} else {
 			return world.getBackground();
 		}
