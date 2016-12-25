@@ -19,14 +19,15 @@ public abstract class Camera {
 		final Vector3D parallelTest = distanceVector.cross(up);
 		if (parallelTest.x == 0 && parallelTest.y == 0 && parallelTest.z == 0) { // test for gymbal locking
 			System.out.println("Gymbal lock");
-			this.u = new Vector3D(0, 0, 1);
-			this.v = new Vector3D(1, 0, 0);
-			this.w = new Vector3D(0, 1, 0);
+			eye.x += 0.0001;
+			eye.y += 0.0001;
+			eye.z += 0.0001;
 		} else { // otherwise calculate the ONB
-			this.w = distanceVector;
-			this.u = up.cross(w).normalize();
-			this.v = w.cross(u).normalize();
-		}		
+			
+		}	
+		this.w = distanceVector.normalize();
+		this.u = up.cross(w).normalize();
+		this.v = w.cross(u);
 	}
 	
 	public abstract void render(World world);
