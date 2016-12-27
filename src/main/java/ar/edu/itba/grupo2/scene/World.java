@@ -98,11 +98,11 @@ public class World {
 		//objects.add(new Plane(new Point3D(0, 2, 0), new Vector3D(0, 1, 0), upperWallMaterial));
 		objects.add(new Plane(new Point3D(0, -2, 0), new Vector3D(0, 1, 0), lowerWallMaterial));
 		//objects.add(new Plane(new Point3D(0, 0, -2), new Vector3D(0, 0, 1), backgroundWallMaterial));
-		objects.add(new Sphere(2, new Point3D(0, 0, 0), sphereMaterial));
+		objects.add(new Sphere(7, new Point3D(0, 0, 0), sphereMaterial));
 		
 		// Add lights
 		final Light directional = new Directional(2f, new RGBColor(1f, 1f, 1f), new Vector3D(1, 1, 1));
-		final Light point = new Point(5f, new RGBColor(2f, 2f, 2f), new Point3D(-3, 2, 3f));
+		final Light point = new Point(1f, new RGBColor(1, 1, 1), new Point3D(7, 7, 7));
 		//addLight(directional);
 		addLight(point);
 	}

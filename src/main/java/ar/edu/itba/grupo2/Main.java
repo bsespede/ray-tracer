@@ -20,7 +20,7 @@ public class Main {
     	World world = new World(width, height, pixelSize, samples, ambientLight, background);
     	world.build();
     	
-		Point3D eye = new Point3D(0, 0, 3);
+		Point3D eye = new Point3D(0, 0, 8);
 		Point3D lookAt = new Point3D(0, 0, 0);
 		Vector3D up = new Vector3D(1, 0, 0);
     	

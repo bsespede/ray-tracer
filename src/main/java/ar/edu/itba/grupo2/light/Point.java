@@ -23,7 +23,7 @@ public class Point implements Light {
 
 	public RGBColor L(final Collision collision) {
 		float r = p.distance(collision.p);
-		return color.scaleCopy(ls / (r * r));
+		return color.scaleCopy(ls / r);
 	}
 	
 
