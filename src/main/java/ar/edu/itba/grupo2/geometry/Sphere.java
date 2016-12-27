@@ -5,14 +5,14 @@ import ar.edu.itba.grupo2.math.Vector3D;
 import ar.edu.itba.grupo2.ray.Collision;
 import ar.edu.itba.grupo2.ray.Ray;
 import ar.edu.itba.grupo2.utils.MathConst;
-import ar.edu.itba.grupo2.utils.Material;
+import ar.edu.itba.grupo2.utils.RGBColor;
 
 public class Sphere extends GeometricObject {
 	
 	private final float radius;
 	private final Point3D p;
 	
-	public Sphere(final float radius, final Point3D p, final Material color) {
+	public Sphere(final float radius, final Point3D p, final RGBColor color) {
 		super(color);
 		this.radius = radius;
 		this.p = p;

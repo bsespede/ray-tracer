@@ -3,12 +3,12 @@ package ar.edu.itba.grupo2;
 import ar.edu.itba.grupo2.math.Point3D;
 import ar.edu.itba.grupo2.math.Vector3D;
 import ar.edu.itba.grupo2.scene.World;
-import ar.edu.itba.grupo2.utils.Material;
+import ar.edu.itba.grupo2.utils.RGBColor;
 
 public class Main {
 
 	public static void main(String[] args) {
-    	World world = new World(500, 500, 1.0f, 0, new Material());
+    	World world = new World(500, 500, 1.0f, 0, new RGBColor());
     	world.build();
 		Point3D eye = new Point3D(0, 0, 10);
 		Point3D lookAt = new Point3D(0, 0, 0);

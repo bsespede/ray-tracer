@@ -2,17 +2,17 @@ package ar.edu.itba.grupo2.geometry;
 
 import ar.edu.itba.grupo2.ray.Collision;
 import ar.edu.itba.grupo2.ray.Ray;
-import ar.edu.itba.grupo2.utils.Material;
+import ar.edu.itba.grupo2.utils.RGBColor;
 
 public abstract class GeometricObject {
 
-	protected final Material material;
+	protected final RGBColor material;
 		
-	public GeometricObject(Material color) {
+	public GeometricObject(RGBColor color) {
 		this.material = color;
 	}
 
-	public Material getColor() {
+	public RGBColor getColor() {
 		return material;
 	}
 	
