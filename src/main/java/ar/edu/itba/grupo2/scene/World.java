@@ -6,6 +6,7 @@ import java.util.List;
 import ar.edu.itba.grupo2.geometry.GeometricObject;
 import ar.edu.itba.grupo2.geometry.Plane;
 import ar.edu.itba.grupo2.geometry.Sphere;
+import ar.edu.itba.grupo2.light.Light;
 import ar.edu.itba.grupo2.math.Point3D;
 import ar.edu.itba.grupo2.math.Vector3D;
 import ar.edu.itba.grupo2.ray.Collision;
@@ -24,6 +25,7 @@ public class World {
 	private final Sampler sampler;
 	private final Tracer tracer;
 	private final List<GeometricObject> objects;
+	private final List<Light> lights;
 	private final RGBColor background;
 	
 	public World(final int hRes, final int vRes) {
@@ -32,6 +34,7 @@ public class World {
 		this.background = new RGBColor();
 		this.objects = new LinkedList<GeometricObject>();
 		this.tracer = new RayTracer(this);
+		this.lights = new LinkedList<Light>();
 	}
 	
 	public World(final int hRes, final int vRes, final float s, final int samples, final RGBColor background) {
@@ -44,6 +47,7 @@ public class World {
 		this.background = background;
 		this.objects = new LinkedList<GeometricObject>();
 		this.tracer = new RayTracer(this);
+		this.lights = new LinkedList<Light>();
 	}
 	
 	public Collision hitObjects(final Ray ray) {
@@ -58,6 +62,10 @@ public class World {
 		}
 		
 		return closestCollision;
+	}
+	
+	public void addLight(final Light light) {
+		lights.add(light);
 	}
 	
 	public void build() {

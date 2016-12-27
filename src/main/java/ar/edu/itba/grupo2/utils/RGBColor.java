@@ -42,5 +42,9 @@ public class RGBColor {
 		this.b = b / d;
 		return this;
 	}
+
+	public RGBColor scaleCopy(float s) {
+		return new RGBColor(r * s, g * s, b * s);
+	}
 	
 }
