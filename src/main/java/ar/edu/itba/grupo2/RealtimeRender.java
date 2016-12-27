@@ -23,7 +23,7 @@ public class RealtimeRender {
 	private Point3D lookAt;
 	private Vector3D up;
 	
-	private static final float MOVE_DELTA = 0.1f;
+	private static final float MOVE_DELTA = 0.02f;
 	
 	public RealtimeRender(final World world, final Point3D eye, final Point3D lookAt, final Vector3D up) {
 		this.world = world;

@@ -1,19 +1,19 @@
 package ar.edu.itba.grupo2.geometry;
 
+import ar.edu.itba.grupo2.material.Material;
 import ar.edu.itba.grupo2.math.Point3D;
 import ar.edu.itba.grupo2.math.Vector3D;
 import ar.edu.itba.grupo2.ray.Collision;
 import ar.edu.itba.grupo2.ray.Ray;
 import ar.edu.itba.grupo2.utils.MathConst;
-import ar.edu.itba.grupo2.utils.RGBColor;
 
 public class Sphere extends GeometricObject {
 	
 	private final float radius;
 	private final Point3D p;
 	
-	public Sphere(final float radius, final Point3D p, final RGBColor color) {
-		super(color);
+	public Sphere(final float radius, final Point3D p, final Material material) {
+		super(material);
 		this.radius = radius;
 		this.p = p;
 	}
@@ -53,7 +53,7 @@ public class Sphere extends GeometricObject {
 	@Override
 	public Collision calculateCollision(final Ray ray, final float t) {
 		final Vector3D aux = new Vector3D(ray.p.x - p.x, ray.p.y - p.y, ray.p.z - p.z);
-		return new Collision(ray.p.translate(ray.d, t), aux.add(ray.d.scale(t)).scale(1 / radius), t, this);
+		return new Collision(ray, ray.p.translate(ray.d, t), aux.add(ray.d.scale(t)).scale(1 / radius), t, this);
 	}
 
 }

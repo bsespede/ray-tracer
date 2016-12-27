@@ -21,8 +21,9 @@ public class Point implements Light {
 		return p.distanceVector(collision.p).normalize();
 	}
 
-	public RGBColor shade(final Collision collision) {
-		return color.scaleCopy(ls / p.distance(collision.p));
+	public RGBColor L(final Collision collision) {
+		float r = p.distance(collision.p);
+		return color.scaleCopy(ls / (r * r));
 	}
 	
 

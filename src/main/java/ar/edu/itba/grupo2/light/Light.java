@@ -8,6 +8,6 @@ public interface Light {
 
 	public Vector3D getDirection(Collision collision);
 	
-	public RGBColor shade(Collision collision);
+	public RGBColor L(Collision collision);
 	
 }

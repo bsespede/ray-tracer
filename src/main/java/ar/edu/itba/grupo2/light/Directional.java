@@ -20,7 +20,7 @@ public class Directional implements Light {
 		return d;
 	}
 
-	public RGBColor shade(final Collision collision) {
+	public RGBColor L(final Collision collision) {
 		return color.scaleCopy(ls);
 	}
 	

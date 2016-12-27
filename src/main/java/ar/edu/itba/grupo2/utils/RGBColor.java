@@ -43,8 +43,12 @@ public class RGBColor {
 		return this;
 	}
 
-	public RGBColor scaleCopy(float s) {
+	public RGBColor scaleCopy(final float s) {
 		return new RGBColor(r * s, g * s, b * s);
+	}
+
+	public RGBColor multCopy(final RGBColor c) {
+		return new RGBColor(r * c.r, g * c.g, b * c.b);
 	}
 	
 }

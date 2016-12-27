@@ -18,7 +18,7 @@ public class Ambient implements Light{
 		return new Vector3D(0, 0, 0);
 	}
 
-	public RGBColor shade(final Collision collision) {
+	public RGBColor L(final Collision collision) {
 		return color.scaleCopy(ls);
 	}
 
