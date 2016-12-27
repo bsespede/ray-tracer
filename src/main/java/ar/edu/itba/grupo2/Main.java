@@ -15,7 +15,7 @@ public class Main {
 		final float pixelSize = 1;
 		final int samples = 1;
 		final Light ambientLight = new Ambient(new RGBColor(1, 1, 1), 0.05f);
-		final RGBColor background = new RGBColor(0, 0, 0);
+		final RGBColor background = new RGBColor(1, 1, 1);
 		
     	World world = new World(width, height, pixelSize, samples, ambientLight, background);
     	world.build();

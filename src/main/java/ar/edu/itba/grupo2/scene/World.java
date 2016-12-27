@@ -102,7 +102,7 @@ public class World {
 		
 		// Add lights
 		final Light directional = new Directional(2f, new RGBColor(1f, 1f, 1f), new Vector3D(1, 1, 1));
-		final Light point = new Point(1f, new RGBColor(1, 1, 1), new Point3D(7, 7, 7));
+		final Light point = new Point(10f, new RGBColor(1, 1, 1), new Point3D(7, 7, 10));
 		//addLight(directional);
 		addLight(point);
 	}
