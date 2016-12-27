@@ -2,20 +2,22 @@ package ar.edu.itba.grupo2.geometry;
 
 import ar.edu.itba.grupo2.ray.Collision;
 import ar.edu.itba.grupo2.ray.Ray;
-import ar.edu.itba.grupo2.utils.RGBColor;
+import ar.edu.itba.grupo2.utils.Material;
 
 public abstract class GeometricObject {
 
-	protected final RGBColor color;
+	protected final Material material;
 		
-	public GeometricObject(RGBColor color) {
-		this.color = color;
+	public GeometricObject(Material color) {
+		this.material = color;
 	}
 
-	public RGBColor getColor() {
-		return color;
+	public Material getColor() {
+		return material;
 	}
 	
-	public abstract Collision hit(final Ray ray);
+	public abstract boolean hit(final Ray ray);
+
+	public abstract Collision calculateCollision(final Ray ray, final float t);
 	
 }

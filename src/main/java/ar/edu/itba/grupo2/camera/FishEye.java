@@ -9,7 +9,7 @@ import ar.edu.itba.grupo2.scene.World;
 import ar.edu.itba.grupo2.screen.ViewPlane;
 import ar.edu.itba.grupo2.tracer.Tracer;
 import ar.edu.itba.grupo2.utils.MathConst;
-import ar.edu.itba.grupo2.utils.RGBColor;
+import ar.edu.itba.grupo2.utils.Material;
 
 public class FishEye extends Camera {
 
@@ -25,14 +25,14 @@ public class FishEye extends Camera {
 		ViewPlane vp = world.getViewPlane();
 		Sampler sampler = world.getSampler();
 		Tracer tracer = world.getTracer();
-		RGBColor pixelColor;
+		Material pixelColor;
 		Ray ray;
 		Point2D sp, pp, pn;
 		float rSquared;
 		
 		for (int row = 0; row < vp.hRes; row++) {
 			for (int col = 0; col < vp.vRes; col++) {
-				pixelColor = new RGBColor();
+				pixelColor = new Material();
 				for (int i = 0; i < sampler.numSamples(); i++) {
 					sp = sampler.sampleUnitSquare();
 					pp = new Point2D(vp.s * (col - 0.5f * vp.hRes + sp.x), vp.s * (row - 0.5f * vp.hRes + sp.y));

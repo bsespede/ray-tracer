@@ -2,14 +2,14 @@ package ar.edu.itba.grupo2.light;
 
 import ar.edu.itba.grupo2.math.Vector3D;
 import ar.edu.itba.grupo2.ray.Collision;
-import ar.edu.itba.grupo2.utils.RGBColor;
+import ar.edu.itba.grupo2.utils.Material;
 
 public class Ambient implements Light{
 
 	private float ls;
-	private RGBColor color;
+	private Material color;
 	
-	public Ambient(final RGBColor color, final float ls) {
+	public Ambient(final Material color, final float ls) {
 		this.color = color;
 		this.ls = ls;
 	}
@@ -18,7 +18,7 @@ public class Ambient implements Light{
 		return new Vector3D(0, 0, 0);
 	}
 
-	public RGBColor shade(final Collision collision) {
+	public Material shade(final Collision collision) {
 		return color.scaleCopy(ls);
 	}
 
