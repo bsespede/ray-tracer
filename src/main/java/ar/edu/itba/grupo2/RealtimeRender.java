@@ -22,14 +22,16 @@ public class RealtimeRender {
 	private Point3D eye;
 	private Point3D lookAt;
 	private Vector3D up;
+	private float fov;
 	
 	private static final float MOVE_DELTA = 0.02f;
 	
-	public RealtimeRender(final World world, final Point3D eye, final Point3D lookAt, final Vector3D up) {
+	public RealtimeRender(final World world, final Point3D eye, final Point3D lookAt, final Vector3D up, final float fov) {
 		this.world = world;
 		this.eye = eye;
 		this.lookAt = lookAt;
 		this.up = up;
+		this.fov = fov;
 	}
 	
 	public void run() {
@@ -40,7 +42,7 @@ public class RealtimeRender {
 		frame.addKeyListener(new CameraKeyListener());
 		while (true) {
 				//long startTime = System.currentTimeMillis();
-				camera = new Pinhole(eye, lookAt, up, 50);
+				camera = new Pinhole(eye, lookAt, up, fov);
 				camera.render(world);
 				//float elapsedtime = (System.currentTimeMillis() - startTime) / 1000f;
 				//System.out.println("[RayTracer] ended. Time: " + elapsedtime + " [s]");

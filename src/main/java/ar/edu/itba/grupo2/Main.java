@@ -16,6 +16,7 @@ public class Main {
 		final int samples = 1;
 		final Light ambientLight = new Ambient(new RGBColor(1, 1, 1), 0.05f);
 		final RGBColor background = new RGBColor(1, 1, 1);
+		final float fov = 25;
 		
     	World world = new World(width, height, pixelSize, samples, ambientLight, background);
     	world.build();
@@ -28,7 +29,7 @@ public class Main {
 //    	camera.render(world);
 //    	Image.draw(world, new File("test/test2.png"), "png");
 		
-		RealtimeRender renderer = new RealtimeRender(world, eye, lookAt, up);
+		RealtimeRender renderer = new RealtimeRender(world, eye, lookAt, up, fov);
 		renderer.run();
 	}
 
