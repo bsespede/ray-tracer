@@ -3,6 +3,7 @@ package ar.edu.itba.grupo2.scene;
 import java.util.LinkedList;
 import java.util.List;
 
+import ar.edu.itba.grupo2.BRDF.GlossySpecular;
 import ar.edu.itba.grupo2.BRDF.Lambert;
 import ar.edu.itba.grupo2.geometry.GeometricObject;
 import ar.edu.itba.grupo2.geometry.Plane;
@@ -13,6 +14,7 @@ import ar.edu.itba.grupo2.light.Light;
 import ar.edu.itba.grupo2.light.Point;
 import ar.edu.itba.grupo2.material.Material;
 import ar.edu.itba.grupo2.material.Matte;
+import ar.edu.itba.grupo2.material.Phong;
 import ar.edu.itba.grupo2.math.Point3D;
 import ar.edu.itba.grupo2.math.Vector3D;
 import ar.edu.itba.grupo2.ray.Collision;
@@ -92,7 +94,7 @@ public class World {
 		//final Material leftmostWallMaterial = new Matte(new Lambert(sampler, 1f, new RGBColor(1, 0, 0)));
 		//final Material rightmostWallMaterial = new Matte(new Lambert(sampler, 1f, new RGBColor(0, 1, 0)));
 		//final Material backgroundWallMaterial = new Matte(new Lambert(sampler, 1f, new RGBColor(1, 1, 0)));
-		final Material sphereMaterial = new Matte(new Lambert(sampler, 1f, new RGBColor(0, 0, 1)));
+		final Material sphereMaterial = new Phong(new Lambert(sampler, 0.9f, new RGBColor(0, 0, 1)), new GlossySpecular(sampler, 0.1f, 5f));
 		//objects.add(new Plane(new Point3D(2, 0, 0), new Vector3D(1, 0, 0), rightmostWallMaterial));
 		//objects.add(new Plane(new Point3D(-2, 0, 0), new Vector3D(1, 0, 0), leftmostWallMaterial));
 		//objects.add(new Plane(new Point3D(0, 2, 0), new Vector3D(0, 1, 0), upperWallMaterial));
@@ -102,9 +104,9 @@ public class World {
 		
 		// Add lights
 		final Light directional = new Directional(2f, new RGBColor(1f, 1f, 1f), new Vector3D(1, 1, 1));
-		//final Light point = new Point(10f, new RGBColor(1, 1, 1), new Point3D(7, 7, 10));
-		addLight(directional);
-		//addLight(point);
+		final Light point = new Point(5f, new RGBColor(1, 1, 1), new Point3D(0, 2f, 8));
+		//addLight(directional);
+		addLight(point);
 	}
 	
 	public RGBColor getBackground() {

@@ -11,19 +11,19 @@ public class Lambert extends BRDF{
 	private final float kd;
 	private final RGBColor color;
 
-	public Lambert(Sampler sampler, float kd, RGBColor color) {
+	public Lambert(final Sampler sampler, final float kd, final RGBColor color) {
 		super(sampler);
 		this.kd = kd;
 		this.color = color;
 	}
 
 	@Override
-	public RGBColor f(Collision collision, Vector3D wi, Vector3D wo) {
+	public RGBColor f(final Collision collision, final Vector3D wi, final Vector3D wo) {
 		return color.scaleCopy(kd * MathConst.INV_PI);
 	}
 
 	@Override
-	public RGBColor rho(Collision collision, Vector3D wo) {
+	public RGBColor rho(final Collision collision, final Vector3D wo) {
 		return color.scaleCopy(kd);
 	}
 

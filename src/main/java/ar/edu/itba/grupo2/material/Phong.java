@@ -1,5 +1,6 @@
 package ar.edu.itba.grupo2.material;
 
+import ar.edu.itba.grupo2.BRDF.GlossySpecular;
 import ar.edu.itba.grupo2.BRDF.Lambert;
 import ar.edu.itba.grupo2.light.Light;
 import ar.edu.itba.grupo2.math.Vector3D;
@@ -7,15 +8,17 @@ import ar.edu.itba.grupo2.ray.Collision;
 import ar.edu.itba.grupo2.scene.World;
 import ar.edu.itba.grupo2.utils.RGBColor;
 
-public class Matte implements Material{
+public class Phong implements Material{
 
 	private final Lambert diffuseBRDF;
+	private final GlossySpecular specularBRDF;	
 	
-	public Matte(Lambert diffuseBRDF) {
+	public Phong(final Lambert diffuseBRDF, final GlossySpecular specularBRDF) {
 		this.diffuseBRDF = diffuseBRDF;
+		this.specularBRDF = specularBRDF;
 	}
 
-	public RGBColor shade(World world, Collision collision) {
+	public RGBColor shade(final World world, final Collision collision) {
 		Vector3D wo = collision.ray.d.scaleCopy(-1);
 		RGBColor L = diffuseBRDF.rho(collision, wo).multCopy(world.getAmbientLight().L(collision));
 		
@@ -23,11 +26,12 @@ public class Matte implements Material{
 			Vector3D wi = light.getDirection(collision);
 			float ndotwi = collision.n.dot(wi);
 			if (ndotwi > 0) {
-				L.add(diffuseBRDF.f(collision, wi, wo).multCopy(light.L(collision)).scaleCopy(ndotwi));			
+				RGBColor combined = diffuseBRDF.f(collision, wo, wi).add(specularBRDF.f(collision, wi, wo));
+				L.add(combined.multCopy(light.L(collision)).scaleCopy(ndotwi));	
 			}
 		}
 		
 		return L;
 	}
-	
+
 }

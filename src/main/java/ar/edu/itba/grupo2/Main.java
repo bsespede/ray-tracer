@@ -15,7 +15,7 @@ public class Main {
 		final float pixelSize = 1;
 		final int samples = 1;
 		final Light ambientLight = new Ambient(new RGBColor(1, 1, 1), 0.05f);
-		final RGBColor background = new RGBColor(1, 1, 1);
+		final RGBColor background = new RGBColor(0.2f, 0.2f, 0.2f);
 		final float fov = 25;
 		
     	World world = new World(width, height, pixelSize, samples, ambientLight, background);
@@ -25,7 +25,7 @@ public class Main {
 		Point3D lookAt = new Point3D(0, 0, 0);
 		Vector3D up = new Vector3D(1, 0, 0);
     	
-//    	Camera camera = new Pinhole(eye, lookAt, up, 2);
+//    	Camera camera = new Pinhole(eye, lookAt, up, fov);
 //    	camera.render(world);
 //    	Image.draw(world, new File("test/test2.png"), "png");
 		
