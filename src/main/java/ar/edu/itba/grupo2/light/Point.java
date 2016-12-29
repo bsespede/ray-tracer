@@ -25,6 +25,9 @@ public class Point implements Light {
 		float r = p.distance(collision.p);
 		return color.scaleCopy(ls / r);
 	}
-	
+
+	public float getLightDistance(Point3D p2) {
+		return p.distance(p2);
+	}	
 
 }

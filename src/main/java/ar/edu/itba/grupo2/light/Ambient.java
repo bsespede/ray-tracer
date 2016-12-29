@@ -1,5 +1,6 @@
 package ar.edu.itba.grupo2.light;
 
+import ar.edu.itba.grupo2.math.Point3D;
 import ar.edu.itba.grupo2.math.Vector3D;
 import ar.edu.itba.grupo2.ray.Collision;
 import ar.edu.itba.grupo2.utils.RGBColor;
@@ -20,6 +21,10 @@ public class Ambient implements Light{
 
 	public RGBColor L(final Collision collision) {
 		return color.scaleCopy(ls);
+	}
+
+	public float getLightDistance(Point3D p) {
+		return Float.MAX_VALUE;
 	}
 
 }

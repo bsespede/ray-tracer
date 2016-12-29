@@ -29,6 +29,7 @@ import ar.edu.itba.grupo2.utils.RGBColor;
 
 public class World {
 
+	private final static boolean SHADOWS_ON = true;
 	private final ViewPlane vp;
 	private final Sampler sampler;
 	private final Tracer tracer;
@@ -79,6 +80,18 @@ public class World {
 		} else {
 			return collisionObject.calculateCollision(ray, t);			
 		}
+	}
+	
+	public boolean hitObjectsForShadow(final Light light, final Collision collision, final Ray ray) {
+		float distance = light.getLightDistance(collision.p);
+		
+		for (GeometricObject object: objects) {
+			if (object.hit(ray) && ray.t < distance) {
+				return true;
+			}
+		}
+		
+		return false;
 	}
 	
 	public void addLight(final Light light) {
@@ -133,4 +146,8 @@ public class World {
 		return ambientLight;
 	}
 	
+	public boolean shadowsOn() {
+		return SHADOWS_ON;
+	}
+
 }

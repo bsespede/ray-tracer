@@ -5,6 +5,7 @@ import ar.edu.itba.grupo2.BRDF.Lambert;
 import ar.edu.itba.grupo2.light.Light;
 import ar.edu.itba.grupo2.math.Vector3D;
 import ar.edu.itba.grupo2.ray.Collision;
+import ar.edu.itba.grupo2.ray.Ray;
 import ar.edu.itba.grupo2.scene.World;
 import ar.edu.itba.grupo2.utils.RGBColor;
 
@@ -26,8 +27,17 @@ public class Phong implements Material{
 			Vector3D wi = light.getDirection(collision);
 			float ndotwi = collision.n.dot(wi);
 			if (ndotwi > 0) {
-				RGBColor combined = diffuseBRDF.f(collision, wo, wi).add(specularBRDF.f(collision, wi, wo));
-				L.add(combined.multCopy(light.L(collision)).scaleCopy(ndotwi));	
+				boolean inShadow = false;
+				
+				if (world.shadowsOn()) {
+					Ray shadowRay = new Ray(collision.p, wi);
+					inShadow = world.hitObjectsForShadow(light, collision, shadowRay);
+				}
+				
+				if (!inShadow) {
+					RGBColor combined = diffuseBRDF.f(collision, wo, wi).add(specularBRDF.f(collision, wi, wo));
+					L.add(combined.multCopy(light.L(collision)).scaleCopy(ndotwi));						
+				}				
 			}
 		}
 		
