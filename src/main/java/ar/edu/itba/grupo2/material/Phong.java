@@ -36,7 +36,7 @@ public class Phong implements Material{
 				
 				if (!inShadow) {
 					RGBColor combined = diffuseBRDF.f(collision, wo, wi).add(specularBRDF.f(collision, wi, wo));
-					L.add(combined.multCopy(light.L(collision)).scaleCopy(ndotwi));						
+					L.add(combined.multCopy(light.L(collision)).scaleCopy(ndotwi * light.G(collision) / light.pdf(collision)));						
 				}				
 			}
 		}
@@ -44,29 +44,8 @@ public class Phong implements Material{
 		return L;
 	}
 
-	public RGBColor areaLightShade(final World world, final Collision collision) {
-		Vector3D wo = collision.ray.d.scaleCopy(-1);
-		RGBColor L = diffuseBRDF.rho(collision, wo).multCopy(world.getAmbientLight().L(collision));
-		
-		for (Light light: world.getLights()) {
-			Vector3D wi = light.getDirection(collision);
-			float ndotwi = collision.n.dot(wi);
-			if (ndotwi > 0) {
-				boolean inShadow = false;
-				
-				if (world.shadowsOn()) {
-					Ray shadowRay = new Ray(collision.p, wi);
-					inShadow = world.hitObjectsForShadow(light, collision, shadowRay);
-				}
-				
-				if (!inShadow) {
-					RGBColor combined = diffuseBRDF.f(collision, wo, wi).add(specularBRDF.f(collision, wi, wo));
-					L.add(combined.multCopy(light.L(collision)).scaleCopy(ndotwi * light.G(collision) / light.pdf(collision)));						
-				}				
-			}
-		}
-		
-		return L;
+	public boolean isEmmisive() {
+		return false;
 	}
 
 }

@@ -5,17 +5,20 @@ import ar.edu.itba.grupo2.math.Point3D;
 import ar.edu.itba.grupo2.math.Vector3D;
 import ar.edu.itba.grupo2.ray.Collision;
 import ar.edu.itba.grupo2.ray.Ray;
+import ar.edu.itba.grupo2.sampler.Sampler;
 import ar.edu.itba.grupo2.utils.MathConst;
 
 public class Sphere extends GeometricObject {
 	
 	private final float radius;
 	private final Point3D p;
+	private final float invArea;
 	
 	public Sphere(final float radius, final Point3D p, final Material material) {
 		super(material);
 		this.radius = radius;
 		this.p = p;
+		this.invArea = 1 / (4 * MathConst.PI);
 	}
 
 	@Override
@@ -54,6 +57,21 @@ public class Sphere extends GeometricObject {
 	public Collision calculateCollision(final Ray ray, final float t) {
 		final Vector3D aux = new Vector3D(ray.p.x - p.x, ray.p.y - p.y, ray.p.z - p.z);
 		return new Collision(ray, ray.p.translate(ray.d, t), aux.add(ray.d.scale(t)).scale(1 / radius), t, this);
+	}
+
+	@Override
+	public Point3D sample(Sampler sampler) {
+		return sampler.sampleUnitSphere().scaleCopy(radius).add(p);
+	}
+
+	@Override
+	public Vector3D getNormal(Point3D point) {
+		return point.distanceVector(p).normalize();
+	}
+
+	@Override
+	public float pdf(Collision collision) {
+		return invArea;
 	}
 
 }

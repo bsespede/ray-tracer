@@ -46,5 +46,16 @@ public class Point3D {
 	public Point3D subCopy(Point3D p) {
 		return new Point3D(x - p.x, y - p.y, z - p.z);
 	}
+
+	public Point3D scale(float s) {
+		this.x *= s;
+		this.y *= s;
+		this.z *= s;
+		return this;
+	}
+
+	public Point3D scaleCopy(float s) {
+		return new Point3D(x * s, y * s, z * s);
+	}
 	
 }

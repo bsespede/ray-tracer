@@ -5,6 +5,7 @@ import ar.edu.itba.grupo2.math.Point3D;
 import ar.edu.itba.grupo2.math.Vector3D;
 import ar.edu.itba.grupo2.ray.Collision;
 import ar.edu.itba.grupo2.ray.Ray;
+import ar.edu.itba.grupo2.sampler.Sampler;
 
 public abstract class GeometricObject {
 
@@ -18,12 +19,19 @@ public abstract class GeometricObject {
 
 	public abstract Collision calculateCollision(final Ray ray, final float t);
 
-	public abstract Point3D sample();
-
 	public Material getMaterial() {
 		return material;
 	}
+	
+	// Area light stuff
+	public abstract Point3D sample(Sampler sampler);
 
 	public abstract Vector3D getNormal(Point3D samplePoint);
+
+	public abstract float pdf(Collision collision);
+
+	public boolean hasEmmisiveMaterial() {
+		return material.isEmmisive();
+	}
 	
 }

@@ -9,8 +9,10 @@ import ar.edu.itba.grupo2.geometry.GeometricObject;
 import ar.edu.itba.grupo2.geometry.Plane;
 import ar.edu.itba.grupo2.geometry.Sphere;
 import ar.edu.itba.grupo2.light.Ambient;
+import ar.edu.itba.grupo2.light.AreaLight;
 import ar.edu.itba.grupo2.light.Directional;
 import ar.edu.itba.grupo2.light.Light;
+import ar.edu.itba.grupo2.material.Emmisive;
 import ar.edu.itba.grupo2.material.Material;
 import ar.edu.itba.grupo2.material.Matte;
 import ar.edu.itba.grupo2.material.Phong;
@@ -85,7 +87,7 @@ public class World {
 		float distance = light.getLightDistance(collision.p, ray);
 		
 		for (GeometricObject object: objects) {
-			if (object.hit(ray) && ray.t < distance) {
+			if (!object.hasEmmisiveMaterial() && object.hit(ray) && ray.t < distance) {
 				return true;
 			}
 		}
@@ -99,28 +101,22 @@ public class World {
 	
 	public void build() {
 		
-		// Add geometries with materials 
-		//final Lambert ambientBRDF = new Lambert(sampler, 1f, new RGBColor(0.1f, 0.1f, 0.1f));
-		//final Material upperWallMaterial = new Matte(new Lambert(sampler, 1f, new RGBColor(1, 0, 1)));
 		final Material lowerWallMaterial = new Matte(new Lambert(sampler, 1f, new RGBColor(1, 1, 1)));
-		//final Material leftmostWallMaterial = new Matte(new Lambert(sampler, 1f, new RGBColor(1, 0, 0)));
-		//final Material rightmostWallMaterial = new Matte(new Lambert(sampler, 1f, new RGBColor(0, 1, 0)));
-		//final Material backgroundWallMaterial = new Matte(new Lambert(sampler, 1f, new RGBColor(1, 1, 0)));
-		final Material sphereMaterial = new Phong(new Lambert(sampler, 0.9f, new RGBColor(1, 1, 1)), new GlossySpecular(sampler, 0.1f, 1.25f));
-		final Material sphere2Material = new Matte(new Lambert(sampler, 0.9f, new RGBColor(1, 1, 1)));
-		//objects.add(new Plane(new Point3D(2, 0, 0), new Vector3D(1, 0, 0), rightmostWallMaterial));
-		//objects.add(new Plane(new Point3D(-2, 0, 0), new Vector3D(1, 0, 0), leftmostWallMaterial));
-		//objects.add(new Plane(new Point3D(0, 2, 0), new Vector3D(0, 1, 0), upperWallMaterial));
-		objects.add(new Plane(new Point3D(0, 0, 0), new Vector3D(0, 1, 0), lowerWallMaterial));
-		//objects.add(new Plane(new Point3D(0, 0, -2), new Vector3D(0, 0, 1), backgroundWallMaterial));
-		objects.add(new Sphere(3, new Point3D(0, 3, 0), sphereMaterial));
-		objects.add(new Sphere(3, new Point3D(6, 3, 1), sphere2Material));
+		final GeometricObject plane = new Plane(new Point3D(0, 0, 0), new Vector3D(0, 1, 0), lowerWallMaterial);
+		objects.add(plane);
 		
-		// Add lights
+		final Material sphereMaterial = new Phong(new Lambert(sampler, 0.9f, new RGBColor(1, 1, 1)), new GlossySpecular(sampler, 0.1f, 1.25f));
+		final GeometricObject sphere = new Sphere(3, new Point3D(0, 3, 0), sphereMaterial);
+		objects.add(sphere);
+		
+		final Material sphere2Material = new Emmisive(100, new RGBColor(1, 1, 1));
+		final GeometricObject sphere2 = new Sphere(3, new Point3D(6, 8, 1), sphere2Material);
+		objects.add(sphere2);
+				
 		final Light directional = new Directional(1f, new RGBColor(1f, 0f, 0f), new Vector3D(1, 1, 1));
-		final Light point = new Directional(1f, new RGBColor(0f, 0f, 1f), new Vector3D(-1, 1, 1));
-		addLight(directional);
-		addLight(point);
+		final Light area = new AreaLight(sphere2, (Emmisive) sphere2Material, sampler);
+		//addLight(directional);
+		addLight(area);
 	}
 	
 	public RGBColor getBackground() {

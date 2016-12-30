@@ -13,7 +13,7 @@ public class Main {
 		final int width = 500;
 		final int height = 500;
 		final float pixelSize = 1;
-		final int samples = 1;
+		final int samples = 100;
 		final Light ambientLight = new Ambient(new RGBColor(1, 1, 1), 0.05f);
 		final RGBColor background = new RGBColor(0.2f, 0.2f, 0.2f);
 		final float fov = 100;

@@ -14,6 +14,7 @@ public abstract class Sampler {
 	protected final List<Point2D> squareSamples;
 	protected final List<Point2D> diskSamples;
 	protected final List<Point3D> hemisphereSamples;
+	protected final List<Point3D> sphereSamples;
 	protected final List<Integer> shuffledIndices;
 	protected final int numSamples;
 	protected final int numSets;
@@ -26,10 +27,12 @@ public abstract class Sampler {
 		this.squareSamples = new ArrayList<Point2D>(numSamples * DEFAULT_SAMPLES_SETS);
 		this.diskSamples = new ArrayList<Point2D>(numSamples * DEFAULT_SAMPLES_SETS);
 		this.hemisphereSamples = new ArrayList<Point3D>(numSamples * DEFAULT_SAMPLES_SETS);
+		this.sphereSamples = new ArrayList<Point3D>(numSamples * DEFAULT_SAMPLES_SETS);
 		this.shuffledIndices = new ArrayList<Integer>(numSamples * DEFAULT_SAMPLES_SETS);
 		generateSquareSamples();
 		mapSquareSamplesToDisk();
 		mapSquareSamplesToHemisphere();
+		mapSquareSamplesToSphere();
 		shuffleIndices();
 	}
 	
@@ -72,6 +75,14 @@ public abstract class Sampler {
 		}
 		
 		return hemisphereSamples.get(jump + shuffledIndices.get(jump + count++ % numSamples));
+	}
+	
+	public Point3D sampleUnitSphere() {
+		if (count % numSamples == 0) {
+			jump = (int) (Math.random() * numSets) * numSamples;
+		}
+		
+		return sphereSamples.get(jump + shuffledIndices.get(jump + count++ % numSamples));
 	}
 	
 	// Based on "Realistic Ray tracing" algorithm by Shirley/Morley
@@ -123,6 +134,23 @@ public abstract class Sampler {
 			hemisphereSamples.add(new Point3D(sinTheta * cosPhi, sinTheta * sinPhi, cosTheta));			
 		}
 	}
+	
+	// Formulas from "Graphic gems III" by Shirley
+		private void mapSquareSamplesToSphere() {
+			for (int i = 0; i < squareSamples.size(); i ++) {
+				
+				float theta = (float) Math.acos(1 - (2 * squareSamples.get(i).x));
+				float phi = 2 * MathConst.PI * squareSamples.get(i).y;
+				
+				float cosPhi = (float) Math.cos(phi);
+				float sinPhi = (float) Math.sin(phi);
+				
+				float cosTheta = (float) Math.cos(theta);
+				float sinTheta = (float) Math.sin(theta);
+				
+				sphereSamples.add(new Point3D(sinTheta * cosPhi, sinTheta * sinPhi, cosTheta));
+			}
+		}
 
 	public int numSamples() {
 		return numSamples;

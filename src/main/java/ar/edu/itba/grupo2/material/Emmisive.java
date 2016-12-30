@@ -15,15 +15,19 @@ public class Emmisive implements Material{
 	}
 
 	public RGBColor shade(final World world, final Collision collision) {
-		return new RGBColor(0, 0, 0);
-	}
-
-	public RGBColor areaLightShade(final World world, final Collision collision) {
 		if (collision.n.dot(collision.ray.d) * (-1) > 0) {
 			return color.scaleCopy(ls);
 		} else {
 			return new RGBColor(0, 0, 0);
 		}
+	}
+
+	public RGBColor getLe(Collision collision) {
+		return color.scaleCopy(ls);
+	}
+
+	public boolean isEmmisive() {
+		return true;
 	}
 
 }
