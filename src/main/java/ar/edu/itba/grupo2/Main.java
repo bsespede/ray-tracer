@@ -16,13 +16,13 @@ public class Main {
 		final int samples = 1;
 		final Light ambientLight = new Ambient(new RGBColor(1, 1, 1), 0.05f);
 		final RGBColor background = new RGBColor(0.2f, 0.2f, 0.2f);
-		final float fov = 25;
+		final float fov = 100;
 		
     	World world = new World(width, height, pixelSize, samples, ambientLight, background);
     	world.build();
     	
-		Point3D eye = new Point3D(0, 0, 8);
-		Point3D lookAt = new Point3D(0, 0, 0);
+		Point3D eye = new Point3D(3, 5, 10);
+		Point3D lookAt = new Point3D(3, 5, 0);
 		Vector3D up = new Vector3D(1, 0, 0);
     	
 //    	Camera camera = new Pinhole(eye, lookAt, up, fov);

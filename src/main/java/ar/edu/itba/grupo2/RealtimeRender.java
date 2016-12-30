@@ -52,6 +52,11 @@ public class RealtimeRender {
 
 	private class FrameDrawer extends Component {
 
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
 		@Override
 		public void paint(Graphics graphics) {
 			super.paint(graphics);

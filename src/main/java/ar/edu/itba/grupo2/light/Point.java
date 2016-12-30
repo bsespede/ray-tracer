@@ -3,6 +3,7 @@ package ar.edu.itba.grupo2.light;
 import ar.edu.itba.grupo2.math.Point3D;
 import ar.edu.itba.grupo2.math.Vector3D;
 import ar.edu.itba.grupo2.ray.Collision;
+import ar.edu.itba.grupo2.ray.Ray;
 import ar.edu.itba.grupo2.utils.RGBColor;
 
 public class Point implements Light {
@@ -26,8 +27,16 @@ public class Point implements Light {
 		return color.scaleCopy(ls / r);
 	}
 
-	public float getLightDistance(Point3D p2) {
+	public float getLightDistance(Point3D p2, Ray ray) {
 		return p.distance(p2);
-	}	
+	}
+	
+	public float G(Collision collision) {
+		return 1;
+	}
+
+	public float pdf(Collision collision) {
+		return 1;
+	}
 
 }

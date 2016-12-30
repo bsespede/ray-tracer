@@ -8,4 +8,8 @@ public interface Material {
 
 	public RGBColor shade(World world, Collision collision);
 
+	public RGBColor areaLightShade(World world, Collision collision);
+
+	public RGBColor getLe(Collision collision);
+
 }

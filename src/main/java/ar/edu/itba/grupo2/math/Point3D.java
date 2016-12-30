@@ -43,4 +43,8 @@ public class Point3D {
 		return this;
 	}
 	
+	public Point3D subCopy(Point3D p) {
+		return new Point3D(x - p.x, y - p.y, z - p.z);
+	}
+	
 }
