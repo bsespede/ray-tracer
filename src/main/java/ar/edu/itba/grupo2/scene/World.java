@@ -3,8 +3,11 @@ package ar.edu.itba.grupo2.scene;
 import java.util.LinkedList;
 import java.util.List;
 
+import com.sun.org.apache.xml.internal.dtm.Axis;
+
 import ar.edu.itba.grupo2.BRDF.GlossySpecular;
 import ar.edu.itba.grupo2.BRDF.Lambert;
+import ar.edu.itba.grupo2.geometry.AxisAlignedBox;
 import ar.edu.itba.grupo2.geometry.GeometricObject;
 import ar.edu.itba.grupo2.geometry.Plane;
 import ar.edu.itba.grupo2.geometry.Sphere;
@@ -30,7 +33,7 @@ import ar.edu.itba.grupo2.utils.RGBColor;
 
 public class World {
 
-	private final static boolean SHADOWS_ON = true;
+	private final static boolean SHADOWS_ON = false;
 	private final ViewPlane vp;
 	private final Sampler sampler;
 	private final Tracer tracer;
@@ -105,15 +108,15 @@ public class World {
 		final GeometricObject plane = new Plane(new Point3D(0, 0, 0), new Vector3D(0, 1, 0), lowerWallMaterial);
 		objects.add(plane);
 		
-		final Material sphereMaterial = new Phong(new Lambert(sampler, 0.9f, new RGBColor(1, 1, 1)), new GlossySpecular(sampler, 0.1f, 1.25f));
-		final GeometricObject sphere = new Sphere(3, new Point3D(0, 3, 0), sphereMaterial);
+		final Material boxMaterial = new Phong(new Lambert(sampler, 0.9f, new RGBColor(1, 0, 0)), new GlossySpecular(sampler, 0.1f, 1.25f));
+		final GeometricObject sphere = new AxisAlignedBox(new Point3D(0, 0, 0), new Point3D(3, 3, 5), boxMaterial);
 		objects.add(sphere);
 		
 		final Material sphere2Material = new Emmisive(100, new RGBColor(1, 1, 1));
 		final GeometricObject sphere2 = new Sphere(3, new Point3D(6, 8, 1), sphere2Material);
 		objects.add(sphere2);
 				
-		final Light directional = new Directional(1f, new RGBColor(1f, 0f, 0f), new Vector3D(1, 1, 1));
+		final Light directional = new Directional(3f, new RGBColor(1f, 1f, 1f), new Vector3D(1, 1, 1));
 		final Light area = new AreaLight(sphere2, (Emmisive) sphere2Material, sampler);
 		//addLight(directional);
 		addLight(area);
