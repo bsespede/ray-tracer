@@ -3,8 +3,6 @@ package ar.edu.itba.grupo2.scene;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.sun.org.apache.xml.internal.dtm.Axis;
-
 import ar.edu.itba.grupo2.BRDF.GlossySpecular;
 import ar.edu.itba.grupo2.BRDF.Lambert;
 import ar.edu.itba.grupo2.geometry.AxisAlignedBox;

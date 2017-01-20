@@ -10,6 +10,13 @@ public class Point3D {
 		this.z = z;
 	}
 	
+	public float squaredDistance(final Point3D p) {
+		float diffX = x - p.x;
+		float diffY = y - p.y;
+		float diffZ = z - p.z;
+		return diffX * diffX + diffY * diffY + diffZ * diffZ;
+	}
+	
 	public float distance(final Point3D p) {
 		float diffX = x - p.x;
 		float diffY = y - p.y;
