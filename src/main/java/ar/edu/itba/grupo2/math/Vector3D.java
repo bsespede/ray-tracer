@@ -77,4 +77,10 @@ public class Vector3D {
 		return this;
 	}
 	
+	public Vector3D transform(Matrix4D mat) {
+		float transX = mat.m[0][0] * x + mat.m[0][1] * y + mat.m[0][2] * z;
+		float transY = mat.m[1][0] * x + mat.m[1][1] * y + mat.m[1][2] * z;
+		float transZ = mat.m[2][0] * x + mat.m[2][1] * y + mat.m[2][2] * z;		
+		return new Vector3D(transX, transY, transZ);
+	}
 }
