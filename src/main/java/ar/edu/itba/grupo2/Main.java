@@ -1,15 +1,10 @@
 package ar.edu.itba.grupo2;
 
-import java.io.File;
-
-import ar.edu.itba.grupo2.camera.Camera;
-import ar.edu.itba.grupo2.camera.Pinhole;
 import ar.edu.itba.grupo2.light.Ambient;
 import ar.edu.itba.grupo2.light.Light;
 import ar.edu.itba.grupo2.math.Point3D;
 import ar.edu.itba.grupo2.math.Vector3D;
 import ar.edu.itba.grupo2.scene.World;
-import ar.edu.itba.grupo2.screen.Image;
 import ar.edu.itba.grupo2.utils.RGBColor;
 
 public class Main {

@@ -5,7 +5,6 @@ import ar.edu.itba.grupo2.material.Material;
 import ar.edu.itba.grupo2.math.Matrix4D;
 import ar.edu.itba.grupo2.ray.Collision;
 import ar.edu.itba.grupo2.ray.Ray;
-import ar.edu.itba.grupo2.utils.MathConst;
 
 public class Object3D {
 
