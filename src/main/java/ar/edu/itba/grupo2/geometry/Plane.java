@@ -13,8 +13,7 @@ public class Plane extends GeometricObject{
 	private final Vector3D n;
 	private final Point3D p;
 	
-	public Plane(final Point3D p, final Vector3D n, final Material material) {
-		super(material);
+	public Plane(final Point3D p, final Vector3D n) {
 		this.p = p;
 		this.n = n.normalize();
 	}
@@ -32,8 +31,8 @@ public class Plane extends GeometricObject{
 	}
 
 	@Override
-	public Collision calculateCollision(final Ray ray, float t) {
-		return new Collision(ray, ray.p.translate(ray.d, t), n, t , this);
+	public Collision calculateCollision(final Ray ray, float t, Material material) {
+		return new Collision(ray, ray.p.translate(ray.d, t), n, t , this, material);
 	}
 
 	@Override

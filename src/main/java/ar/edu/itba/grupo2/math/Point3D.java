@@ -9,7 +9,25 @@ public class Point3D {
 		this.y = y;
 		this.z = z;
 	}
-	
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Point3D other = (Point3D) obj;
+		if (Float.floatToIntBits(x) != Float.floatToIntBits(other.x))
+			return false;
+		if (Float.floatToIntBits(y) != Float.floatToIntBits(other.y))
+			return false;
+		if (Float.floatToIntBits(z) != Float.floatToIntBits(other.z))
+			return false;
+		return true;
+	}
+
 	public float squaredDistance(final Point3D p) {
 		float diffX = x - p.x;
 		float diffY = y - p.y;

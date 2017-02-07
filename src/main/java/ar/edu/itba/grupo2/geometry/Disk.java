@@ -14,8 +14,7 @@ public class Disk extends GeometricObject{
 	private final Vector3D n;
 	private final float radius;
 	
-	public Disk(final Point3D c, final Vector3D n, final float radius, final Material material) {
-		super(material);
+	public Disk(final Point3D c, final Vector3D n, final float radius) {
 		this.c = c;
 		this.n = n;
 		this.radius = radius;
@@ -40,8 +39,8 @@ public class Disk extends GeometricObject{
 	}
 
 	@Override
-	public Collision calculateCollision(Ray ray, float t) {
-		return new Collision(ray, ray.p.translate(ray.d, t), n, t, this);
+	public Collision calculateCollision(Ray ray, float t, Material material) {
+		return new Collision(ray, ray.p.translate(ray.d, t), n, t, this, material);
 	}
 
 	@Override

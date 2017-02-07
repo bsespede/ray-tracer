@@ -8,20 +8,10 @@ import ar.edu.itba.grupo2.ray.Ray;
 import ar.edu.itba.grupo2.sampler.Sampler;
 
 public abstract class GeometricObject {
-
-	protected final Material material;
-		
-	public GeometricObject(Material material) {
-		this.material = material;
-	}
 	
 	public abstract boolean hit(final Ray ray);
 
-	public abstract Collision calculateCollision(final Ray ray, final float t);
-
-	public Material getMaterial() {
-		return material;
-	}
+	public abstract Collision calculateCollision(final Ray ray, final float t, final Material material);
 	
 	// Area light stuff
 	public abstract Point3D sample(Sampler sampler);
@@ -30,8 +20,4 @@ public abstract class GeometricObject {
 
 	public abstract float pdf(Collision collision);
 
-	public boolean hasEmmisiveMaterial() {
-		return material.isEmmisive();
-	}
-	
 }

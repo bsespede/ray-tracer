@@ -1,4 +1,4 @@
-package ar.edu.itba.grupo2.BRDF;
+package ar.edu.itba.grupo2.material.BRDF;
 
 import ar.edu.itba.grupo2.math.Vector3D;
 import ar.edu.itba.grupo2.ray.Collision;

@@ -13,8 +13,7 @@ public class Triangle extends GeometricObject{
 	private final Point3D v0, v1, v2;
 	private final Vector3D n;
 	
-	public Triangle(Vector3D n, Point3D v0, Point3D v1, Point3D v2, Material material) {
-		super(material);
+	public Triangle(Vector3D n, Point3D v0, Point3D v1, Point3D v2) {
 		this.n = n;
 		this.v0 = v0;
 		this.v1 = v1;
@@ -79,8 +78,8 @@ public class Triangle extends GeometricObject{
 	}
 
 	@Override
-	public Collision calculateCollision(Ray ray, float t) {
-		return new Collision(ray, ray.p.translate(ray.d, t), n, t, this);
+	public Collision calculateCollision(Ray ray, float t, Material material) {
+		return new Collision(ray, ray.p.translate(ray.d, t), n, t, this, material);
 	}
 
 	@Override

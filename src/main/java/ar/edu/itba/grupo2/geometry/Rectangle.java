@@ -18,8 +18,7 @@ public class Rectangle extends GeometricObject{
 	private final float aModule;
 	private final float bModule;
 	
-	public Rectangle(final Point3D p0, final Vector3D a, final Vector3D b, final Vector3D n, final Material material) {
-		super(material);
+	public Rectangle(final Point3D p0, final Vector3D a, final Vector3D b, final Vector3D n) {
 		this.p0 = p0;
 		this.a = a;
 		this.b = b;
@@ -55,8 +54,8 @@ public class Rectangle extends GeometricObject{
 	}
 
 	@Override
-	public Collision calculateCollision(Ray ray, float t) {
-		return new Collision(ray, ray.p.translate(ray.d, t), n, t, this);
+	public Collision calculateCollision(Ray ray, float t, Material material) {
+		return new Collision(ray, ray.p.translate(ray.d, t), n, t, this, material);
 	}
 
 	@Override

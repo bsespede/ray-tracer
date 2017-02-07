@@ -1,8 +1,8 @@
 package ar.edu.itba.grupo2.material;
 
-import ar.edu.itba.grupo2.BRDF.GlossySpecular;
-import ar.edu.itba.grupo2.BRDF.Lambert;
 import ar.edu.itba.grupo2.light.Light;
+import ar.edu.itba.grupo2.material.BRDF.GlossySpecular;
+import ar.edu.itba.grupo2.material.BRDF.Lambert;
 import ar.edu.itba.grupo2.math.Vector3D;
 import ar.edu.itba.grupo2.ray.Collision;
 import ar.edu.itba.grupo2.ray.Ray;

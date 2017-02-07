@@ -18,7 +18,7 @@ public class RayCast implements Tracer {
 		Collision collision = world.hitObjects(ray);
 		
 		if (collision != null) {
-			final Material material = collision.object.getMaterial();
+			final Material material = collision.material;
 			return material.shade(world, collision);
 			//return new RGBColor(collision.object.getColor().r / collision.t, collision.object.getColor().g / collision.t, collision.object.getColor().b / collision.t);
 			//return collision.object.getColor();

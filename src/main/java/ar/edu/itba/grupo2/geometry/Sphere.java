@@ -14,8 +14,7 @@ public class Sphere extends GeometricObject {
 	private final Point3D p;
 	private final float invArea;
 	
-	public Sphere(final float radius, final Point3D p, final Material material) {
-		super(material);
+	public Sphere(final float radius, final Point3D p) {
 		this.radius = radius;
 		this.p = p;
 		this.invArea = 1 / (4 * MathConst.PI);
@@ -54,9 +53,9 @@ public class Sphere extends GeometricObject {
 	}
 
 	@Override
-	public Collision calculateCollision(final Ray ray, final float t) {
+	public Collision calculateCollision(final Ray ray, final float t, final Material material) {
 		final Vector3D aux = new Vector3D(ray.p.x - p.x, ray.p.y - p.y, ray.p.z - p.z);
-		return new Collision(ray, ray.p.translate(ray.d, t), aux.add(ray.d.scale(t)).scale(1 / radius), t, this);
+		return new Collision(ray, ray.p.translate(ray.d, t), aux.add(ray.d.scale(t)).scale(1 / radius), t, this, material);
 	}
 
 	@Override

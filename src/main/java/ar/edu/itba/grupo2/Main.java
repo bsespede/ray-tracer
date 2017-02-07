@@ -19,7 +19,7 @@ public class Main {
 		final int width = 500;
 		final int height = 500;
 		final float pixelSize = 1;
-		final int samples = 300;
+		final int samples = 1;
 		final Light ambientLight = new Ambient(new RGBColor(1, 1, 1), 0.05f);
 		final RGBColor background = new RGBColor(0.2f, 0.2f, 0.2f);
 		final float fov = 100;
@@ -32,13 +32,13 @@ public class Main {
 		Vector3D up = new Vector3D(1, 0, 0);
     	
 		System.out.println("Starting render");
-    	Camera camera = new Pinhole(eye, lookAt, up, fov);
-    	camera.render(world);
-    	Image.draw(world, new File("test/test2.png"), "png");
+//    	Camera camera = new Pinhole(eye, lookAt, up, fov);
+//    	camera.render(world);
+//    	Image.draw(world, new File("test/test2.png"), "png");
     	System.out.println("Finished render");
 		
-//		RealtimeRender renderer = new RealtimeRender(world, eye, lookAt, up, fov);
-//		renderer.run();
+		RealtimeRender renderer = new RealtimeRender(world, eye, lookAt, up, fov);
+		renderer.run();
 	}
 
 }

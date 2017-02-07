@@ -12,8 +12,7 @@ public class AxisAlignedBox extends GeometricObject{
 	
 	private final Point3D p0, p1;
 
-	public AxisAlignedBox(Point3D p0, Point3D p1, Material material) {
-		super(material);
+	public AxisAlignedBox(Point3D p0, Point3D p1) {
 		this.p0 = p0;
 		this.p1 = p1;
 	}
@@ -97,7 +96,7 @@ public class AxisAlignedBox extends GeometricObject{
 	}
 
 	@Override
-	public Collision calculateCollision(Ray ray, float t) {
+	public Collision calculateCollision(Ray ray, float t, Material material) {
 		float txMin, tyMin, tzMin;
 		float txMax, tyMax, tzMax;
 		
@@ -162,9 +161,9 @@ public class AxisAlignedBox extends GeometricObject{
 		
 		if (t0 < t1 && t1 > MathConst.EPSILON) {
 			if (t0 > MathConst.EPSILON) {
-				return new Collision(ray, ray.p.translate(ray.d, t1), faceIn.getNormal(), t1, this); // Pega afuera
+				return new Collision(ray, ray.p.translate(ray.d, t1), faceIn.getNormal(), t1, this, material); // Pega afuera
 			} else {
-				return new Collision(ray, ray.p.translate(ray.d, t1), new Vector3D(1, 0, 0), t1, this); // Pega adentro
+				return new Collision(ray, ray.p.translate(ray.d, t1), new Vector3D(1, 0, 0), t1, this, material); // Pega adentro
 			}
 		}
 		return null;
