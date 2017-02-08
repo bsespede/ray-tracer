@@ -6,14 +6,20 @@ import ar.edu.itba.grupo2.utils.MathConst;
 
 public class BBox {
 
-	private final Point3D p0;
-	private final Point3D p1;
+	public final Point3D p0;
+	public final Point3D p1;
 	
 	public BBox(Point3D p0, Point3D p1) {
 		this.p0 = p0;
 		this.p1 = p1;
 	}
 
+	public static BBox surround (BBox b1, BBox b2) {
+		Point3D min = new Point3D(Math.min(b1.p0.x, b2.p0.x), Math.min(b1.p0.y, b2.p0.y), Math.min(b1.p0.z, b2.p0.z));
+		Point3D max = new Point3D(Math.max(b1.p1.x, b2.p1.x), Math.max(b1.p1.y, b2.p1.y), Math.max(b1.p1.z, b2.p1.z));
+		return new BBox(min, max);
+	}
+	
 	public boolean hit(Ray ray) {
 		float txMin, tyMin, tzMin;
 		float txMax, tyMax, tzMax;
