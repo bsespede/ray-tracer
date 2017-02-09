@@ -56,6 +56,6 @@ public class ThinLens extends Camera{
 	private Vector3D rayDirection(final Point2D pixel, final Point2D lens) {
 		Point2D p = new Point2D(pixel.x * f / d, pixel.y * f / d);
 		
-		return u.scaleCopy(p.x - lens.x).add(v.scaleCopy(pixel.y - lens.y)).sub(w.scaleCopy(f)).normalize();
+		return u.scaleCopy(p.x - lens.x).add(v.scaleCopy(p.y - lens.y)).sub(w.scaleCopy(f)).normalize();
 	}
 }

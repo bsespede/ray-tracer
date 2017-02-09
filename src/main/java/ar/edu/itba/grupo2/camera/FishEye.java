@@ -36,8 +36,10 @@ public class FishEye extends Camera {
 				for (int i = 0; i < sampler.numSamples(); i++) {
 					sp = sampler.sampleUnitSquare();
 					pp = new Point2D(vp.s * (col - 0.5f * vp.hRes + sp.x), vp.s * (row - 0.5f * vp.hRes + sp.y));
+					
 					pn = new Point2D(2.0f / (vp.s * vp.hRes) * pp.x, 2.0f / (vp.s * vp.vRes) * pp.y);
 					rSquared = pn.x * pn.x + pn.y * pn.y;
+					
 					ray = new Ray(eye, 	rayDirection(pn, rSquared));
 					if (rSquared <= 1) {
 						pixelColor.add(tracer.traceRay(ray));
@@ -54,7 +56,7 @@ public class FishEye extends Camera {
 	private Vector3D rayDirection(final Point2D pn, final float rSquared) {
 		if (rSquared <= 1) {
 			final float r = (float) Math.sqrt(rSquared);
-			final float psi = r * psiMax * MathConst.EPSILON;
+			final float psi = r * psiMax * (float) Math.PI;
 			final float sinPsi = (float) Math.sin(psi);
 			final float cosPsi = (float) Math.cos(psi);
 			final float sinAlpha = pn.y / r;

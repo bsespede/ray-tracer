@@ -10,6 +10,7 @@ import javax.swing.JFrame;
 
 import ar.edu.itba.grupo2.camera.Camera;
 import ar.edu.itba.grupo2.camera.Pinhole;
+import ar.edu.itba.grupo2.camera.ThinLens;
 import ar.edu.itba.grupo2.math.Point3D;
 import ar.edu.itba.grupo2.math.Vector3D;
 import ar.edu.itba.grupo2.scene.World;
@@ -42,7 +43,7 @@ public class RealtimeRender {
 		frame.addKeyListener(new CameraKeyListener());
 		while (true) {
 				//long startTime = System.currentTimeMillis();
-				camera = new Pinhole(eye, lookAt, up, fov);
+				camera = new ThinLens(eye, lookAt, up, fov, 30f, 5f);
 				camera.render(world);
 				//float elapsedtime = (System.currentTimeMillis() - startTime) / 1000f;
 				//System.out.println("[RayTracer] ended. Time: " + elapsedtime + " [s]");

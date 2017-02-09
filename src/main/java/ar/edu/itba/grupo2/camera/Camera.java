@@ -16,12 +16,11 @@ public abstract class Camera {
 		this.lookAt = lookAt;
 		this.up = up;
 		final Vector3D distanceVector = eye.distanceVector(lookAt);
-		final Vector3D parallelTest = distanceVector.cross(up);
-		if (parallelTest.x == 0 && parallelTest.y == 0 && parallelTest.z == 0) { // test for gymbal locking
+		if (eye.x == lookAt.x && eye.z == lookAt.z && lookAt.y < eye.y) { // test for gymbal locking
 			System.out.println("[INFO] Gymbal-lock");
-			this.w = new Vector3D(0, 0, 0);
-			this.u = new Vector3D(0, 0, 0);
-			this.v = new Vector3D(0, 0, 0);
+			this.w = new Vector3D(0, 1, 0);
+			this.u = new Vector3D(0, 0, 1);
+			this.v = new Vector3D(1, 0, 0);
 		} else { // otherwise calculate the ONB
 			this.w = distanceVector.normalize();
 			this.u = up.cross(w).normalize();
